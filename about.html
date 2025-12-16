@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GD Engineers - Precision Machining Experts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+
+
+
+        /* LOADING ANIMATION */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        
+        .loading-dots {
+            display: inline-block;
+            width: 30px;
+        }
+        
+        .loading-dots span {
+            animation: dots 1.5s infinite;
+            opacity: 0;
+        }
+        
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes dots {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* FADE-IN ANIMATION FOR CONTENT */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* RESET & VARIABLES */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        :root {
+            --primary: #0B2545;
+            --secondary: #6B7280;
+            --accent: #F4B400;
+            --accent-light: #FFD166;
+            --background: #F8FAFC;
+            --text: #111827;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(11, 37, 69, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+
+
+
+        
+        /* --- HEADER SECTION --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+        .mobile-menu-btn { display: none; font-size: 24px; cursor: pointer; }
+
+        /* /* --- HERO SECTION ---  */
+
+
+        
+
+/* header */
+/* --- TOP BAR (Dark Blue) --- */
+  .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #d9a000;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+
+.top-bar {
+    background-color: var(--primary);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    padding: 8px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-info a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contact-info a:hover { color: var(--accent); }
+.divider { margin: 0 10px; opacity: 0.3; }
+.social-mini a { color: rgba(255, 255, 255, 0.8); text-decoration: none; margin-left: 15px; font-size: 12px; }
+
+/* --- MAIN HEADER (Sticky White) --- */
+.main-header {
+    background-color: var(--white);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky; /* Modern sticky positioning */
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    /* display: flex; */
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand Logo */
+.brand-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+.brand-logo span { color: var(--accent); }
+
+/* Desktop Menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0; padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Gold Underline Effect on Hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s;
+}
+
+.nav-link:hover { color: var(--primary); }
+.nav-link:hover::after { width: 100%; }
+
+/* Buttons & Actions */
+.btn-sm {
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- HAMBURGER ICON (CSS Only Animation) --- */
+.hamburger {
+    display: none; /* Hidden on Desktop */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary);
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Hamburger Animation classes (added via JS) */
+.hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+/* --- MOBILE DRAWER (Slide In) --- */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Hidden initially */
+    width: 280px;
+    height: 100vh;
+    background-color: var(--white);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 1001;
+    padding: 25px;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-drawer.open { right: 0; }
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 15px;
+}
+
+.close-btn {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--primary);
+    line-height: 0.5;
+}
+
+.mobile-links {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-links li { margin-bottom: 20px; }
+
+.mobile-links a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+}
+
+.drawer-footer {
+    margin-top: auto; /* Push to bottom */
+}
+
+/* Darken Background Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    backdrop-filter: blur(2px);
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 992px) {
+    .desktop-only { display: none; } /* Hide desktop menu */
+    .hamburger { display: flex; } /* Show hamburger */
+    .top-bar { display: none; } /* Hide top bar on mobile to save space */
+    
+    .main-header { height: 70px; }
+}
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer */
+
+
+
+/* footer */
+/* --- FOOTER SECTION --- */
+.site-footer {
+    background-color: #061a33; /* Slightly darker than --primary */
+    color: #cbd5e1; /* Light Grey text */
+    padding-top: 0;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Gold Top Border */
+.footer-border {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+}
+
+.footer-grid {
+    display: grid;
+    /* 4 Columns layout */
+    grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
+    gap: 40px;
+    padding: 80px 0 60px 0;
+}
+
+/* Typography */
+.footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.footer-logo span { color: var(--accent); }
+
+.footer-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+.footer-heading {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* Links Styling */
+.footer-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li { margin-bottom: 12px; }
+
+.footer-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hover Effect: Slide right & turn Gold */
+.footer-nav a:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+.social-links svg { width: 18px; height: 18px; }
+
+/* Contact Column */
+.contact-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.icon-small {
+    font-size: 18px;
+    color: var(--accent);
+    margin-top: 2px; /* Align with first line of text */
+}
+
+.contact-row p { margin: 0; font-size: 14px; }
+.contact-row a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+.contact-row a:hover { color: var(--accent); }
+.mono-font { font-family: 'Roboto Mono', monospace; }
+
+/* Map Styling */
+.map-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: border-color 0.3s;
+}
+
+.map-wrapper:hover {
+    border-color: var(--accent);
+}
+
+/* Grayscale Map Effect - Professional Look */
+.map-wrapper iframe {
+    filter: grayscale(100%) invert(90%) contrast(85%); /* Makes map dark/grey */
+    transition: filter 0.5s ease;
+}
+
+/* Reveal Color on Hover */
+.map-wrapper:hover iframe {
+    filter: grayscale(0%) invert(0%);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+.legal-links a:hover { color: var(--accent); }
+.dot { margin: 0 10px; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 Columns */
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 Column */
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .separator-left {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 20px 0 30px;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        .separator {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 20px auto 30px;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        .separator-left:hover, .separator:hover {
+            width: 120px;
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            background-color: var(--primary);
+            background-image: linear-gradient(rgba(11, 37, 69, 0.9), rgba(11, 37, 69, 0.8)), 
+                            url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background effect */
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(244, 180, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(244, 180, 0, 0.05) 0%, transparent 50%);
+            animation: pulse 8s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--white);
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: titleReveal 1.2s ease-out;
+        }
+        
+        @keyframes titleReveal {
+            0% { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .breadcrumbs {
+            color: #cbd5e1;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .breadcrumbs .current {
+            color: var(--accent);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .breadcrumbs .current::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .breadcrumbs .current:hover::after {
+            transform: scaleX(1);
+        }
+
+        .breadcrumbs .divider { 
+            margin: 0 10px; 
+        }
+
+        /* --- STORY SECTION --- */
+        .story-section {
+            padding: 100px 0;
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            opacity: 0.03;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .story-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lead-text {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            transition: var(--transition);
+            line-height: 1.8;
+        }
+        
+        .lead-text:hover {
+            border-left-width: 8px;
+            padding-left: 25px;
+            background: rgba(244, 180, 0, 0.03);
+        }
+
+        .quote-box {
+            background-color: #f8fafc;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            transition: var(--transition);
+            transform: translateY(0);
+        }
+        
+        .quote-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-light);
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 60px;
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-name {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .quote-box:hover .founder-name {
+            letter-spacing: 1.5px;
+        }
+
+        /* Visuals */
+        .story-visual {
+            position: relative;
+            padding: 20px;
+        }
+
+        .img-frame-main {
+            position: relative;
+            z-index: 2;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .img-frame-main:hover {
+            transform: perspective(1000px) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .img-frame-main img { 
+            width: 100%; 
+            display: block;
+            transition: var(--transition);
+            transform: scale(1);
+        }
+        
+        .img-frame-main:hover img {
+            transform: scale(1.05);
+        }
+
+        .gold-frame {
+            position: absolute;
+            top: 0; 
+            right: 0;
+            width: 100%; 
+            height: 100%;
+            border: 10px solid rgba(244, 180, 0, 0.15);
+            z-index: 1;
+            transform: translate(20px, -20px);
+            transition: var(--transition);
+        }
+        
+        .story-visual:hover .gold-frame {
+            transform: translate(25px, -25px);
+            border-width: 12px;
+        }
+
+        .years-badge {
+            position: absolute;
+            bottom: -30px;
+            left: 40px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 20px 30px;
+            z-index: 3;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            cursor: default;
+        }
+        
+        .years-badge:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .years-badge strong {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            color: var(--accent);
+            line-height: 1;
+            transition: var(--transition);
+        }
+        
+        .years-badge:hover strong {
+            transform: scale(1.1);
+        }
+
+        .years-badge span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Floating animation for badge */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .years-badge {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @media (max-width: 992px) {
+            .story-wrapper { grid-template-columns: 1fr; }
+            .gold-frame { display: none; }
+        }
+
+        /* --- EXPORTS SECTION --- */
+        .exports-section {
+            padding: 100px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .exports-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(244, 180, 0, 0.05) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(244, 180, 0, 0.05) 0%, transparent 20%);
+            pointer-events: none;
+        }
+
+        .export-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .light-tag { color: var(--accent); }
+
+        .exports-section h2 { 
+            color: var(--white); 
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .exports-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.5s ease;
+        }
+        
+        .exports-section h2:hover::after {
+            width: 100%;
+        }
+
+        .exports-section p {
+            color: #cbd5e1;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .exports-section p:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .check-list li {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--white);
+            position: relative;
+            padding-left: 30px;
+            transition: var(--transition);
+            cursor: default;
+        }
+        
+        .check-list li:hover {
+            color: var(--accent-light);
+            transform: translateX(5px);
+        }
+        
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        
+        .check-list li:hover::before {
+            transform: scale(1.3);
+        }
+
+        /* Map Visualization */
+        .map-visual {
+            position: relative;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+        
+        .map-visual:hover {
+            opacity: 1;
+        }
+
+        .world-map-svg {
+            width: 100%;
+            filter: invert(1);
+            transition: var(--transition);
+        }
+        
+        .map-visual:hover .world-map-svg {
+            filter: invert(1) brightness(1.2);
+        }
+
+        .connection-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .dot {
+            width: 14px; 
+            height: 14px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 15px var(--accent);
+            z-index: 2;
+            transition: var(--transition);
+        }
+        
+        .dot:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 25px var(--accent);
+        }
+        
+        .dot::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .dot:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: 25px;
+        }
+
+        /* Approximate positions on the map overlay */
+        .india { top: 55%; left: 68%; }
+        .europe { top: 35%; left: 52%; }
+
+        /* Animate the connection */
+        .line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            top: 45%; left: 60%;
+            width: 0;
+            transform-origin: left;
+            transform: rotate(-35deg);
+            animation: growLine 3s infinite ease-in-out;
+        }
+
+        @keyframes growLine {
+            0% { width: 0; opacity: 0; }
+            50% { width: 20%; opacity: 1; }
+            100% { width: 0; opacity: 0; transform: rotate(-35deg) translate(50px, -50px); }
+        }
+
+        @media (max-width: 992px) {
+            .export-grid { grid-template-columns: 1fr; }
+            .map-visual { margin-top: 40px; height: 200px; overflow: hidden; }
+        }
+
+        /* --- TIMELINE SECTION --- */
+        .timeline-section {
+            padding: 100px 0;
+            background-color: #F8FAFC;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            opacity: 0.03;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .section-header.center-aligned {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-box {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px 0;
+            z-index: 1;
+        }
+
+        /* Vertical Line */
+        .timeline-box::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 100px;
+            width: 2px;
+            background-color: #e2e8f0;
+            transition: var(--transition);
+        }
+        
+        .timeline-box:hover::before {
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .year {
+            width: 80px;
+            text-align: right;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+            padding-top: 5px;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .year {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .marker {
+            width: 16px; 
+            height: 16px;
+            background-color: var(--accent);
+            border: 4px solid var(--white);
+            border-radius: 50%;
+            margin: 8px 30px 0 13px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 0 2px #e2e8f0;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .marker {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px var(--accent-light);
+            background-color: var(--white);
+            border-color: var(--accent);
+        }
+
+        .content {
+            flex: 1;
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        
+        .timeline-item:hover .content {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-left-color: var(--accent);
+        }
+
+        .content h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .content h3 {
+            color: var(--accent);
+        }
+
+        .content p {
+            font-size: 15px;
+            color: var(--secondary);
+            margin: 0;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .content p {
+            color: var(--text);
+        }
+
+        /* Pulse animation for timeline markers */
+        @keyframes pulseMarker {
+            0% { box-shadow: 0 0 0 0 rgba(244, 180, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 180, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 180, 0, 0); }
+        }
+        
+        .marker {
+            animation: pulseMarker 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-box::before { left: 20px; }
+            .timeline-item { flex-direction: column; padding-left: 50px; }
+            .year { text-align: left; width: 100%; margin-bottom: 5px; color: var(--accent); }
+            .marker { position: absolute; left: 13px; top: 35px; margin: 0; }
+        }
+        
+        /* BACK TO TOP BUTTON */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">LOADING<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    </div>
+
+
+
+
+        <!-- Header -->
+    <!-- TOP BAR: Contact Info (Visible on Desktop) -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <a href="mailto:info@gdengineers.in">
+                    <span class="icon">&#9993;</span> info@gdengineers.in
+                </a>
+                <span class="divider">|</span>
+                <a href="tel:+919876543210">
+                    <span class="icon">&#128222;</span> +91 98765 43210
+                </a>
+            </div>
+            <div class="social-mini">
+                <a href="#">LinkedIn</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN NAVIGATION (Sticky) -->
+<header class="main-header" id="navbar">
+    <div class="container">
+        <nav class="navbar">
+            
+            <!-- Logo -->
+            <a href="#" class="brand-logo">
+                GD <span>Engineers</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu desktop-only">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            </ul>
+
+            <!-- CTA Button & Mobile Toggle -->
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary btn-sm desktop-only">Get Quote</a>
+                
+                <!-- Hamburger Icon -->
+                <div class="hamburger" id="mobile-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<!-- MOBILE SIDE DRAWER -->
+<div class="mobile-drawer" id="mobile-menu">
+    <div class="drawer-header">
+        <span class="brand-logo dark">GD <span>Engineers</span></span>
+        <div class="close-btn" id="close-menu">&times;</div>
+    </div>
+    
+    <ul class="mobile-links">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About Us</a></li>
+        <li><a href="#services" onclick="closeMenu()">Services</a></li>
+        <li><a href="#products" onclick="closeMenu()">Products</a></li>
+        <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+
+    <div class="drawer-footer">
+        <a href="tel:+919876543210" class="btn btn-primary full-width">Call Now</a>
+    </div>
+</div>
+
+<!-- Overlay for Mobile Menu -->
+<div class="menu-overlay" id="menu-overlay"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- PAGE HEADER -->
+    <div class="page-header fade-in">
+        <div class="container">
+            <h1 class="page-title">About Our Legacy</h1>
+            <div class="breadcrumbs">
+                <span>Home</span> <span class="divider">/</span> <span class="current">About Us</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY SECTION -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-wrapper">
+                <!-- Left: Content -->
+                <div class="story-content fade-in">
+                    <span class="section-tag">Our History</span>
+                    <h2>Engineering Excellence <br>Since 1994</h2>
+                    <div class="separator-left"></div>
+                    
+                    <p class="lead-text">
+                        Founded by <strong>Mr. Gopi Chand Sharma</strong>, GD Engineers began with a vision to provide custom machined components to the automotive industry with uncompromising quality.
+                    </p>
+                    
+                    <p>
+                        With over <strong>35 years of personal experience</strong> in the Machine Tool division, Mr. Sharma established a culture of precision. What started as a humble workshop has grown into a fully equipped manufacturing unit, driven by a reputation for quality work, competitive pricing, and customer satisfaction.
+                    </p>
+
+                    <!-- Signature / Quote Box -->
+                    <div class="quote-box">
+                        <p>"Quality is not an act, it is a habit. We built this company on word-of-mouth trust."</p>
+                        <span class="founder-name">- Gopi Chand Sharma, Founder</span>
+                    </div>
+                </div>
+
+                <!-- Right: Image Composition -->
+                <div class="story-visual fade-in">
+                    <div class="img-frame-main">
+                        <!-- Placeholder for Founder Image or Old Workshop Photo -->
+                        <img src="/gd/New folder/counter-bg.jpg" alt="Factory Floor">
+                    </div>
+                    <!-- Decorative Gold Frame -->
+                    <div class="gold-frame"></div>
+                    
+                    <!-- Floating Stat -->
+                    <div class="years-badge">
+                        <strong>30+</strong>
+                        <span>Years of<br>Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPORTS SECTION -->
+    <section class="exports-section">
+        <div class="container">
+            <div class="export-grid">
+                <!-- Left: Text -->
+                <div class="export-text fade-in">
+                    <span class="section-tag light-tag">Global Reach</span>
+                    <h2>Exporting Precision to Europe</h2>
+                    <div class="separator-left"></div>
+                    <p>
+                        GD Engineers has bridged the gap between Indian manufacturing and European quality standards. We regularly export machinery parts, dies, and moulds to international markets.
+                    </p>
+                    <p>
+                        Our components are machined to the <strong>accuracy of microns</strong>, meeting the stringent requirements of the global automotive and aerospace sectors.
+                    </p>
+                    
+                    <ul class="check-list">
+                        <li title="High Precision Profiles">&#10003; High Precision Profiles</li>
+                        <li title="Micron-Level Accuracy">&#10003; Micron-Level Accuracy</li>
+                        <li title="International Packaging Standards">&#10003; International Packaging Standards</li>
+                    </ul>
+                </div>
+
+                <!-- Right: Map Graphic (CSS Based) -->
+                <div class="map-visual fade-in">
+                    <!-- Abstract Map Image -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" alt="World Map" class="world-map-svg">
+                    
+                    <!-- Connection Line (India to Europe) -->
+                    <div class="connection-line">
+                        <span class="dot india" title="Manufacturing Unit"></span>
+                        <span class="line"></span>
+                        <span class="dot europe" title="Export Market"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE SECTION -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header center-aligned fade-in">
+                <span class="section-tag">Our Journey</span>
+                <h2>Evolution of GD Engineers</h2>
+                <div class="separator"></div>
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-item fade-in">
+                    <div class="year">1994</div>
+                    <div class="marker"></div>
+                    <div class="content">
+                        <h3>Inception</h3>
+                        <p>Founded by Mr. Gopi Chand Sharma as a custom machining workshop.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="year">2005</div>
+                    <div class="marker"></div>
+                    <div class="content">
+                        <h3>Expansion</h3>
+                        <p>Invested heavily in new CNC & VMC equipment to meet rising customer demands.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="year">Present</div>
+                    <div class="marker"></div>
+                    <div class="content">
+                        <h3>Global Export</h3>
+                        <p>Established as a trusted exporter to Europe with ISO 9001:2015 certification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BACK TO TOP BUTTON -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+
+
+
+
+<footer class="site-footer">
+    
+    <!-- Top Border Line -->
+    <div class="footer-border"></div>
+
+    <div class="container">
+        <div class="footer-grid">
+
+            <!-- COLUMN 1: Brand & About -->
+            <div class="footer-col brand-col">
+                <a href="#" class="footer-logo">GD <span>Engineers</span></a>
+                <p class="footer-desc">
+                    Precision manufacturing and engineering solutions since 1994. ISO 9001:2015 certified exporters delivering quality to the global automotive industry.
+                </p>
+                
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                </div>
+            </div>
+
+            <!-- COLUMN 2: Quick Links -->
+            <div class="footer-col links-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Company</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#products">Product Portfolio</a></li>
+                    <li><a href="#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: Contact Details -->
+            <div class="footer-col contact-col">
+                <h4 class="footer-heading">Head Office</h4>
+                
+                <div class="contact-row">
+                    <div class="icon-small">&#128205;</div> <!-- Pin Icon -->
+                    <p>
+                        Plot No. 123, Industrial Area,<br>
+                        MIDC, Pune - 411026,<br>
+                        Maharashtra, India.
+                    </p>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-small">&#9993;</div> <!-- Email Icon -->
+                    <p><a href="mailto:info@gdengineers.in">info@gdengineers.in</a><br><a href="mailto:sales@gdengineers.in">sales@gdengineers.in</a></p>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-small">&#128222;</div> <!-- Phone Icon -->
+                    <p class="mono-font">+91 98765 43210<br>+91 20 1234 5678</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 4: Location Map -->
+            <div class="footer-col map-col">
+                <h4 class="footer-heading">Locate Factory</h4>
+                <div class="map-wrapper">
+                    <!-- Google Map Iframe (Placeholder set to Pune) -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.0471115669!2d73.79292687353086!3d18.524598599502376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="200" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 GD Engineers. All Rights Reserved.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <span class="dot">·</span>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+  
+</body>
+  <script>
+        // Loading Screen Animation
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.add('hidden');
+            
+            // Show fade-in elements with staggered delay
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 200 + 300); // Staggered animation
+            });
+            
+            // Show back to top button after loading
+            setTimeout(() => {
+                document.getElementById('backToTop').classList.add('visible');
+            }, 1000);
+        });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // Add scroll-based animations
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const fadeElements = document.querySelectorAll('.fade-in:not(.visible)');
+            
+            fadeElements.forEach(el => {
+                const elPosition = el.offsetTop;
+                
+                if (scrollPosition > elPosition + 100) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+        
+        // Add hover sound effect simulation (visual only)
+        document.querySelectorAll('.timeline-item, .quote-box, .years-badge').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform || '';
+            });
+        });
+        
+        // Add click animation to check list items
+        document.querySelectorAll('.check-list li').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'translateX(10px)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('mobile-toggle');
+    const drawer = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('menu-overlay');
+    const closeBtn = document.getElementById('close-menu');
+
+    // Function to toggle menu
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('active');
+        // Prevent scrolling when menu is open
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : 'auto';
+    }
+
+    // Event Listeners
+    hamburger.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+});
+
+// Helper function to close menu when a link is clicked
+function closeMenu() {
+    document.getElementById('mobile-toggle').classList.remove('active');
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('menu-overlay').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+</script>
+
+
+</html>
