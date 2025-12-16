@@ -120,11 +120,17 @@
         .mobile-menu-btn { display: none; font-size: 24px; cursor: pointer; }
 
         /* --- HERO SECTION --- */
+
+
+
         /* --- MODERN HERO SECTION --- */
+
+
+/* --- MODERN HERO SECTION --- */
 .hero-modern {
     position: relative;
     background-color: var(--primary); /* Deep Navy Base */
-    padding: 130px 0 50px 0; /* Top padding accounts for fixed header */
+    padding: 60px 0 50px 0; /* Top padding accounts for fixed header */
     overflow: hidden;
     min-height: 90vh;
     display: flex;
@@ -161,7 +167,7 @@
     gap: 60px;
     position: relative;
     z-index: 3; /* Above background */
-    /* align-items: center; */
+    align-items: center;
 }
 
 /* --- LEFT COLUMN: TEXT --- */
@@ -248,7 +254,7 @@
 /* Stats Row */
 .hero-stats {
     display: none;
-    /* display: flex; */
+    /* display: flex; CHANGED from display: none */
     align-items: center;
     background: rgba(0, 0, 0, 0.2); /* Darker box behind stats */
     padding: 20px 30px;
@@ -284,11 +290,17 @@
 /* --- RIGHT COLUMN: VISUAL --- */
 .image-container {
     position: relative;
-    /* Create a cool shape for the image container */
+    width: 100%; /* ADDED for responsiveness */
+}
+
+.hero-visual { /* ADDED this class to match HTML */
+    width: 100%;
 }
 
 .floating-img {
-    /* width: 100%; */
+    width: 100%; /* CHANGED from comment to actual property */
+    max-width: 100%; /* ADDED for better responsiveness */
+    height: auto; /* ADDED to maintain aspect ratio */
     border-radius: 20px;
     box-shadow: 20px 20px 0px rgba(244, 180, 0, 0.1); /* Gold shadow offset */
     /* animation: float-anim 6s ease-in-out infinite; */
@@ -306,9 +318,6 @@
     position: absolute;
     top: 0px;
     right: -30px;
-    /* bottom: 40px;
-    left: -30px; */
-     /* Overlaps the left edge */
     background-color: var(--white);
     padding: 15px 25px;
     border-radius: 8px;
@@ -318,6 +327,7 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     animation: float-anim 6s ease-in-out infinite;
     animation-delay: 1s; /* Slight delay so it moves differently than the main image */
+    max-width: 200px; /* ADDED for mobile */
 }
 
 .icon-check {
@@ -354,19 +364,30 @@
         align-items: center;
     }
 
+    .hero-desc {
+        max-width: 100%;
+    }
+
     .hero-stats {
         margin: 0 auto; /* Center stats */
     }
 
     .float-card {
-        left: 0; /* Align card better on mobile */
-        /* bottom: 20px; */
+        right: 0; /* CHANGED from left: 0 */
+        left: auto; /* Ensure it doesn't conflict with right */
+        top: -20px; /* Adjusted position */
     }
 }
 
 @media (max-width: 768px) {
     .hero-modern {
-        padding: 120px 0 60px 0;
+        /* padding: 120px 0 60px 0; */
+        min-height: auto; /* CHANGED from 90vh */
+    }
+
+    .hero-wrapper {
+        gap: 40px;
+         /* Reduced gap */
     }
 
     .hero-text h1 {
@@ -376,14 +397,92 @@
     .hero-actions {
         flex-direction: column;
         width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
-    .btn {
+    .btn, .btn-ghost {
         width: 100%;
         text-align: center;
         justify-content: center;
+        padding: 14px 24px; /* Slightly smaller padding */
+    }
+
+    .hero-desc {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .hero-stats {
+        flex-wrap: wrap; /* ADDED for very small screens */
+        justify-content: center;
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .stat-box {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .stat-divider {
+        margin: 0 15px;
+        height: 20px;
+    }
+
+    .float-card {
+        position: relative; /* CHANGED from absolute on very small screens */
+        right: auto;
+        top: -30px;
+        margin: 0 auto;
+        max-width: 250px;
+        animation: none; /* Remove animation on mobile for performance */
+    }
+
+    .floating-img {
+        border-radius: 15px;
+        box-shadow: 10px 10px 0px rgba(244, 180, 0, 0.1); /* Smaller shadow */
     }
 }
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .badge-pill {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-divider {
+        display: none; /* Hide dividers on very small screens */
+    }
+
+    .hero-actions {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1009,7 +1108,7 @@
 /* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
     .review-card-dark {
-        width: 280px; /* Slightly smaller cards on mobile */
+        width: 320px; /* Slightly smaller cards on mobile */
         padding: 20px;
     }
     
