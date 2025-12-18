@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & VARIABLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0B2545;
+            --secondary: #6B7280;
+            --accent: #F4B400;
+            --background: #F8FAFC;
+            --text: #111827;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #d9a000;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+
+
+
+        /* header */
+
+
+        /* --- HEADER SECTION --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+        .mobile-menu-btn { display: none; font-size: 24px; cursor: pointer; }
+
+        /* --- Header SECTION --- *
+
+/* header */
+/* --- TOP BAR (Dark Blue) --- */
+.top-bar {
+    background-color: var(--primary);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    padding: 8px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-info a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contact-info a:hover { color: var(--accent); }
+.divider { margin: 0 10px; opacity: 0.3; }
+.social-mini a { color: rgba(255, 255, 255, 0.8); text-decoration: none; margin-left: 15px; font-size: 12px; }
+
+
+
+
+
+
+/* --- MAIN HEADER (Sticky White) --- */
+.main-header {
+    background-color: var(--white);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky; /* Modern sticky positioning */
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    /* display: flex; */
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand Logo */
+.brand-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+.brand-logo span { color: var(--accent); }
+
+/* Desktop Menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0; padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Gold Underline Effect on Hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s;
+}
+
+.nav-link:hover { color: var(--primary); }
+.nav-link:hover::after { width: 100%; }
+
+/* Buttons & Actions */
+.btn-sm {
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- HAMBURGER ICON (CSS Only Animation) --- */
+.hamburger {
+    display: none; /* Hidden on Desktop */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary);
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Hamburger Animation classes (added via JS) */
+.hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+/* --- MOBILE DRAWER (Slide In) --- */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Hidden initially */
+    width: 280px;
+    height: 100vh;
+    background-color: var(--white);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 1001;
+    padding: 25px;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-drawer.open { right: 0; }
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 15px;
+}
+
+.close-btn {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--primary);
+    line-height: 0.5;
+}
+
+.mobile-links {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-links li { margin-bottom: 20px; }
+
+.mobile-links a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+}
+
+.drawer-footer {
+    margin-top: auto; /* Push to bottom */
+}
+
+/* Darken Background Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    backdrop-filter: blur(2px);
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 992px) {
+    .desktop-only { display: none; } /* Hide desktop menu */
+    .hamburger { display: flex; } /* Show hamburger */
+    .top-bar { display: none; } /* Hide top bar on mobile to save space */
+    
+    .main-header { height: 70px; }
+}
+
+
+
+
+    /* header end */
+
+
+
+
+    /* footers start  */
+
+
+    
+
+/* footer */
+/* --- FOOTER SECTION --- */
+.site-footer {
+    background-color: #061a33; /* Slightly darker than --primary */
+    color: #cbd5e1; /* Light Grey text */
+    padding-top: 0;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Gold Top Border */
+.footer-border {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+}
+
+.footer-grid {
+    display: grid;
+    /* 4 Columns layout */
+    grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
+    gap: 40px;
+    padding: 80px 0 60px 0;
+}
+
+/* Typography */
+.footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.footer-logo span { color: var(--accent); }
+
+.footer-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+.footer-heading {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* Links Styling */
+.footer-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li { margin-bottom: 12px; }
+
+.footer-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hover Effect: Slide right & turn Gold */
+.footer-nav a:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+.social-links svg { width: 18px; height: 18px; }
+
+/* Contact Column */
+.contact-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.icon-small {
+    font-size: 18px;
+    color: var(--accent);
+    margin-top: 2px; /* Align with first line of text */
+}
+
+.contact-row p { margin: 0; font-size: 14px; }
+.contact-row a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+.contact-row a:hover { color: var(--accent); }
+.mono-font { font-family: 'Roboto Mono', monospace; }
+
+/* Map Styling */
+.map-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: border-color 0.3s;
+}
+
+.map-wrapper:hover {
+    border-color: var(--accent);
+}
+
+/* Grayscale Map Effect - Professional Look */
+.map-wrapper iframe {
+    filter: grayscale(100%) invert(90%) contrast(85%); /* Makes map dark/grey */
+    transition: filter 0.5s ease;
+}
+
+/* Reveal Color on Hover */
+.map-wrapper:hover iframe {
+    filter: grayscale(0%) invert(0%);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+.legal-links a:hover { color: var(--accent); }
+.dot { margin: 0 10px; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 Columns */
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 Column */
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+
+
+
+
+    /* footers end  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* hero section */
+
+
+
+
+        /* --- MACHINERY SPLIT HERO --- */
+.machinery-hero-split {
+    display: flex;
+    min-height: 85vh; /* Takes up most of the screen */
+    background-color: var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- LEFT SIDE: CONTENT --- */
+.hero-left {
+    flex: 1; /* Takes 50% width */
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 60px 80px;
+    background-color: var(--primary);
+}
+
+/* Technical Grid Pattern (Graph Paper Effect) */
+.grid-pattern {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.breadcrumbs-simple {
+    color: var(--accent);
+    font-size: 14px;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.breadcrumbs-simple a { color: #cbd5e1; text-decoration: none; }
+
+.hero-left h1 {
+    font-size: 64px;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.highlight-line {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent); /* Outline effect */
+    position: relative;
+}
+
+/* Solid gold underline */
+.highlight-line::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 6px;
+    background-color: var(--accent);
+    margin-top: 10px;
+}
+
+.hero-desc {
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+/* Buttons */
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.btn-gold {
+    background-color: var(--accent);
+    color: var(--primary);
+    padding: 14px 32px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-gold:hover { background-color: #d9a000; transform: translateY(-2px); }
+
+.btn-outline-white {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    padding: 14px 32px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    display: flex; align-items: center; gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-outline-white:hover {
+    border-color: var(--white);
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* Specs Row at Bottom */
+.specs-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-item strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: var(--white);
+}
+
+.spec-item span {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--secondary);
+    letter-spacing: 1px;
+}
+
+.vertical-line {
+    width: 1px; height: 40px;
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* --- RIGHT SIDE: IMAGE --- */
+.hero-right {
+    flex: 0.9; /* Takes 45% width */
+    position: relative;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); /* Diagonal Cut */
+    margin-left: -50px; /* Overlap effect */
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(11, 37, 69, 0.6), transparent);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .machinery-hero-split {
+        flex-direction: column; /* Stack vertically */
+        min-height: auto;
+    }
+
+    .hero-left {
+        padding: 80px 40px;
+        order: 2; /* Content below image on tablets if desired, or keep 1 */
+    }
+
+    .hero-right {
+        order: 1;
+        flex: none;
+        height: 400px; /* Fixed height for image */
+        clip-path: none; /* Remove diagonal cut on mobile */
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hero-left h1 { font-size: 48px; }
+}
+
+@media (max-width: 768px) {
+    .hero-left { padding: 60px 20px; }
+    .hero-left h1 { font-size: 36px; }
+    
+    .hero-actions { flex-direction: column; }
+    .btn { width: 100%; text-align: center; justify-content: center; }
+    
+    .specs-row { flex-wrap: wrap; gap: 20px; }
+    .vertical-line { display: none; }
+    .spec-item { width: 45%; }
+}
+        /* hero section ends */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* --- MACHINERY SECTION STYLES --- */
+.machinery-section {
+    padding: 100px 0;
+    background-color: var(--background); /* Light Grey */
+}
+
+/* Header Styling (Consistent with your system) */
+.section-header { margin-bottom: 50px; }
+
+.section-tag {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--accent); /* Gold */
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.machinery-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary); /* Navy */
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.separator-left {
+    height: 4px;
+    width: 60px;
+    background-color: var(--accent);
+    margin: 15px 0;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--secondary);
+    max-width: 600px;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* --- TECH TABLE STYLING --- */
+.table-container {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    overflow: hidden; /* Rounds corners */
+    border-top: 4px solid var(--accent); /* Top Gold Border */
+}
+
+.tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+}
+
+.tech-table thead {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.tech-table th {
+    padding: 18px 25px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tech-table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+}
+
+.tech-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Hover Effect for Rows */
+.tech-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.tech-table td {
+    padding: 20px 25px;
+    vertical-align: top; /* Align text to top for readability */
+    color: var(--text);
+}
+
+/* Column 1: Machine Name */
+.machine-name {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.machine-name span {
+    font-size: 20px;
+    color: var(--accent); /* Icon Color */
+    opacity: 0.8;
+}
+
+/* Column 2: Specs */
+.spec-detail {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--secondary);
+}
+
+.spec-detail .label {
+    font-weight: 600;
+    color: var(--primary);
+    margin-right: 6px;
+}
+
+.spec-detail.highlight {
+    color: var(--primary);
+    background-color: rgba(244, 180, 0, 0.1); /* Light Gold Bg */
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 5px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Column 3: Quantity */
+.text-center { text-align: center; }
+
+.count-badge {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--primary);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    /* Transform table into cards for Mobile */
+    .tech-table thead { display: none; } /* Hide headers */
+    
+    .tech-table, .tech-table tbody, .tech-table tr, .tech-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .tech-table tbody tr {
+        margin-bottom: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 15px;
+        background: var(--white);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .tech-table td {
+        padding: 10px 0;
+        text-align: left;
+    }
+
+    .machine-name {
+        font-size: 18px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Add labels via CSS for context on mobile */
+    .count-badge::before {
+        content: "Quantity: ";
+        font-size: 14px;
+        color: var(--secondary);
+        font-weight: 400;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .count-badge {
+        text-align: left;
+        margin-top: 10px;
+        display: block;
+    }
+}
+
+
+
+
+        /* --- QUALITY SECTION STYLES --- */
+        /* --- QUALITY SECTION (Dark Theme) --- */
+.quality-section {
+    padding: 100px 0;
+    background-color: var(--primary); /* Navy Blue Background */
+    color: var(--white);
+    position: relative;
+}
+
+/* Background Pattern (Optional subtle texture) */
+.quality-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Header Adjustments for Dark Mode */
+.light-theme h2 { color: var(--white); }
+.light-text { color: #cbd5e1; }
+
+/* --- QUALITY TABLE STYLING --- */
+.quality-table-wrapper {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
+    border-bottom: 4px solid var(--accent); /* Bottom Gold Border */
+}
+
+.quality-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+}
+
+.quality-table thead {
+    background-color: #f1f5f9; /* Light Grey Header */
+    color: var(--primary);
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.quality-table th {
+    padding: 18px 25px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.quality-table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+}
+
+.quality-table tbody tr:hover {
+    background-color: #fffbeb; /* Very light gold tint on hover */
+}
+
+.quality-table td {
+    padding: 18px 25px;
+    color: var(--text);
+    vertical-align: middle;
+}
+
+/* Instrument Name Column */
+.inst-name {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-measure {
+    color: var(--secondary);
+    font-size: 18px;
+}
+
+/* Specs Column */
+.qa-spec {
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+}
+
+.qa-spec strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* The Technical "Tag" for LC/Accuracy */
+.qa-tag {
+    display: inline-block;
+    background-color: #e2e8f0;
+    color: var(--primary);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* Gold Tag for high precision (Micron level) */
+.qa-tag.gold {
+    background-color: rgba(244, 180, 0, 0.15);
+    color: #b48600; /* Darker Gold for readability */
+    border: 1px solid rgba(244, 180, 0, 0.3);
+}
+
+/* Qty Column */
+.qty-bold {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent); /* Gold Numbers */
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .quality-table thead { display: none; }
+    
+    .quality-table, .quality-table tbody, .quality-table tr, .quality-table td {
+        display: block; width: 100%;
+    }
+
+    .quality-table tbody tr {
+        margin-bottom: 15px;
+        padding: 15px;
+        background: var(--white);
+        border-radius: 6px;
+    }
+
+    .inst-name {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .qty-bold {
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    .qty-bold::before {
+        content: "Quantity: ";
+        font-size: 14px;
+        color: var(--secondary);
+        font-family: 'Inter', sans-serif;
+    }
+}
+
+
+
+
+/* section 3 */
+
+
+/* --- FACILITY HIGHLIGHTS SECTION --- */
+.facility-highlights {
+    padding: 100px 0;
+    background-color: #F8FAFC; /* Light Grey to contrast with previous Dark section */
+}
+
+.highlights-grid {
+    display: grid;
+    /* 4 Columns for Desktop */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.highlight-card {
+    background: var(--white);
+    padding: 30px 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(11, 37, 69, 0.05); /* Faint Navy */
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.icon-wrapper svg {
+    width: 28px;
+    height: 28px;
+}
+
+.highlight-card:hover .icon-wrapper {
+    background-color: var(--primary);
+    color: var(--accent); /* Icon turns Gold */
+}
+
+.highlight-card h3 {
+    font-size: 18px;
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.highlight-card p {
+    font-size: 14px;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+/* --- MINI CTA AT BOTTOM --- */
+.infra-cta {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.infra-cta p {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: 600;
+    margin: 0;
+}
+
+.btn-link {
+    color: var(--accent); /* Gold Link */
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.btn-link:hover {
+    color: #d9a000;
+    border-bottom-color: #d9a000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .highlights-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Columns on Tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .highlights-grid {
+        grid-template-columns: 1fr; /* 1 Column on Mobile */
+    }
+    
+    .infra-cta {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+        <!-- Header -->
+    <!-- TOP BAR: Contact Info (Visible on Desktop) -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <a href="mailto:info@gdengineers.in">
+                    <span class="icon">&#9993;</span> info@gdengineers.in
+                </a>
+                <span class="divider">|</span>
+                <a href="tel:+919876543210">
+                    <span class="icon">&#128222;</span> +91 98765 43210
+                </a>
+            </div>
+            <div class="social-mini">
+                <a href="#">LinkedIn</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN NAVIGATION (Sticky) -->
+<header class="main-header" id="navbar">
+    <div class="container">
+        <nav class="navbar">
+            
+            <!-- Logo -->
+            <a href="#" class="brand-logo">
+                GD <span>Engineers</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu desktop-only">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="machine.html" class="nav-link">Machinary</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            </ul>
+
+            <!-- CTA Button & Mobile Toggle -->
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary btn-sm desktop-only">Get Quote</a>
+                
+                <!-- Hamburger Icon -->
+                <div class="hamburger" id="mobile-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<!-- MOBILE SIDE DRAWER -->
+<div class="mobile-drawer" id="mobile-menu">
+    <div class="drawer-header">
+        <span class="brand-logo dark">GD <span>Engineers</span></span>
+        <div class="close-btn" id="close-menu">&times;</div>
+    </div>
+    
+    <ul class="mobile-links">
+        <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About Us</a></li>
+        <li><a href="#services" onclick="closeMenu()">Services</a></li>
+        <li><a href="machine.html" onclick="closeMenu()">Machinary</a></li>
+        <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+
+    <div class="drawer-footer">
+        <a href="tel:+919876543210" class="btn btn-primary full-width">Call Now</a>
+    </div>
+</div>
+
+<!-- Overlay for Mobile Menu -->
+<div class="menu-overlay" id="menu-overlay"></div>
+
+
+
+
+
+    <!-- Hero Section -->
+
+
+
+
+
+<!-- MACHINERY HERO SECTION -->
+<!-- MACHINERY HERO: BLUEPRINT STYLE -->
+<section class="machinery-hero-split">
+    
+    <!-- Left Panel: Content -->
+    <div class="hero-left">
+        <!-- CSS Grid Pattern Background -->
+        <div class="grid-pattern"></div>
+        
+        <div class="content-wrapper">
+            <div class="breadcrumbs-simple">
+                <a href="index.html">Home</a> / <span class="current">Machinery</span>
+            </div>
+
+            <h1>The Power Behind <br><span class="highlight-line">Precision</span></h1>
+            
+            <p class="hero-desc">
+                Our manufacturing floor is an ecosystem of advanced CNC technology and manual craftsmanship. Explore the fleet that drives our micron-level accuracy.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#machinery-list" class="btn btn-gold">View Machine List</a>
+                <a href="#" class="btn btn-outline-white">
+                    <span class="icon-download">&#11015;</span> Download PDF
+                </a>
+            </div>
+
+            <!-- Quick Specs Row -->
+            <div class="specs-row">
+                <div class="spec-item">
+                    <strong>24/7</strong>
+                    <span>Operations</span>
+                </div>
+                <div class="vertical-line"></div>
+                <div class="spec-item">
+                    <strong>ISO</strong>
+                    <span>Certified Lab</span>
+                </div>
+                <div class="vertical-line"></div>
+                <div class="spec-item">
+                    <strong>100%</strong>
+                    <span>Power Backup</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel: Image -->
+    <div class="hero-right">
+        <!-- Main Image -->
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="CNC Factory Floor" class="hero-img">
+        
+        <!-- Decorative Overlay Gradient -->
+        <div class="img-overlay"></div>
+    </div>
+
+</section>
+
+
+
+    <section class="machinery-section">
+    <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+            <span class="section-tag">Infrastructure</span>
+            <h2>Production Machinery</h2>
+            <div class="separator-left"></div>
+            <p class="section-subtitle">
+                Our manufacturing floor houses a robust fleet of high-precision CNC, VMC, and manual turning centers capable of handling diverse complex geometries.
+            </p>
+        </div>
+
+        <!-- Machinery Table Wrapper -->
+        <div class="table-container">
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th width="35%">Machine Name / Type</th>
+                        <th width="50%">Make, Capacity & Accuracy</th>
+                        <th width="15%" class="text-center">Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Item 1 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-gear">&#9881;</span> CNC Turning Center
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> Jobber XL
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Specs:</span> Dia. 270mm, Length 375mm
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.015 mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">01</td>
+                    </tr>
+
+                    <!-- Item 2 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-gear">&#9881;</span> CNC Turning Center
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> Morie Seiki
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Specs:</span> 500mm x 700mm
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.03 mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">01</td>
+                    </tr>
+
+                    <!-- Item 3 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-gear">&#9881;</span> CNC Turning Center
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> Super Jobber XL
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Specs:</span> 270mm x 550mm
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.015 mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">01</td>
+                    </tr>
+
+                    <!-- Item 4 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-chip">&#128190;</span> VMC Machine (3-Axis)
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> TAL
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Travel:</span> 610mm x 410mm x 500mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">01</td>
+                    </tr>
+
+                    <!-- Item 5 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-chip">&#128190;</span> VMC Machine (3-Axis)
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> TAL
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Travel:</span> 450mm x 350mm x 350mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">01</td>
+                    </tr>
+
+                    <!-- Item 6 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-tool">&#128295;</span> Boring Machine
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> Kent USA
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.005 mm (Least Count)
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">03</td>
+                    </tr>
+
+                    <!-- Item 7 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-tool">&#128295;</span> Milling cum Boring
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> HMT (M1TR)
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.005 mm (Least Count)
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">02</td>
+                    </tr>
+
+                    <!-- Item 8 -->
+                    <tr>
+                        <td class="machine-name">
+                            <span class="icon-tool">&#128295;</span> Lathe Machine
+                        </td>
+                        <td>
+                            <div class="spec-detail">
+                                <span class="label">Make:</span> Everest
+                            </div>
+                            <div class="spec-detail">
+                                <span class="label">Capacity:</span> 1800 mm
+                            </div>
+                            <div class="spec-detail highlight">
+                                <span class="label">Accuracy:</span> 0.05 mm
+                            </div>
+                        </td>
+                        <td class="text-center count-badge">02</td>
+                    </tr>
+                    
+                    <!-- Additional items (Drill, Surface Grinder) can be added following this pattern -->
+
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</section>
+
+
+
+
+
+<section class="quality-section">
+    <div class="container">
+        
+        <!-- Section Header (Light Theme for Dark Bg) -->
+        <div class="section-header light-theme">
+            <span class="section-tag">Quality Control</span>
+            <h2>Inspection Equipment</h2>
+            <div class="separator-left"></div>
+            <p class="section-subtitle light-text">
+                Our dedicated standards room is equipped with calibrated measuring instruments to ensure every component meets the micron-level tolerances required by ISO 9001:2015.
+            </p>
+        </div>
+
+        <!-- Quality Equipment Table -->
+        <div class="quality-table-wrapper">
+            <table class="quality-table">
+                <thead>
+                    <tr>
+                        <th width="40%">Instrument Name</th>
+                        <th width="45%">Range / Accuracy / Make</th>
+                        <th width="15%" class="text-center">Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <!-- Item 1: Surface Plate -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#9635;</span> Surface Plate
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Size:</strong> 600 x 1000 mm
+                            </div>
+                            <div class="qa-spec">
+                                <strong>Material:</strong> Grey Granite
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">01</td>
+                    </tr>
+
+                    <!-- Item 2: Digital Vernier -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#128207;</span> Digital Vernier Caliper
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Range:</strong> 0 - 200 mm
+                            </div>
+                            <div class="qa-tag">
+                                LC: 0.01 mm
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">03</td>
+                    </tr>
+
+                    <!-- Item 3: Micrometer -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#128207;</span> Micrometer
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Range:</strong> 0 - 200 mm
+                            </div>
+                            <div class="qa-tag">
+                                LC: 0.01 mm
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">10</td>
+                    </tr>
+
+                    <!-- Item 4: Puppy Dial -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#9201;</span> Puppy Dial Indicator
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Type:</strong> Lever Type
+                            </div>
+                            <div class="qa-tag gold">
+                                LC: 0.001 mm
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">03</td>
+                    </tr>
+
+                    <!-- Item 5: Bore Gauge -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#10683;</span> Plunger Dial Bore Gauge
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Range:</strong> 6 - 300 mm
+                            </div>
+                            <div class="qa-tag">
+                                LC: 0.01 mm
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">04</td>
+                    </tr>
+
+                    <!-- Item 6: Height Gauge -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#8597;</span> Height Checking Gauge
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Make:</strong> Mitutoyo
+                            </div>
+                            <div class="qa-spec">
+                                <strong>Size:</strong> 12" (300mm) & 24" (600mm)
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">02</td>
+                    </tr>
+
+                    <!-- Item 7: Bench Center -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#9878;</span> Bench Center
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Capacity:</strong> 600 mm
+                            </div>
+                            <div class="qa-spec">
+                                <strong>Usage:</strong> Concentricity Check
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">01</td>
+                    </tr>
+
+                    <!-- Item 8: Hardness Tester -->
+                    <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#128174;</span> Rockwell Hardness Tester
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Type:</strong> Analog
+                            </div>
+                            <div class="qa-spec">
+                                <strong>Scale:</strong> HRC / HRB
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">01</td>
+                    </tr>
+
+                     <!-- Item 9: Slip Gauge -->
+                     <tr>
+                        <td class="inst-name">
+                            <span class="icon-measure">&#9633;</span> Slip Gauge Box
+                        </td>
+                        <td>
+                            <div class="qa-spec">
+                                <strong>Grade:</strong> 1
+                            </div>
+                            <div class="qa-spec">
+                                <strong>Set:</strong> Master Calibration Set
+                            </div>
+                        </td>
+                        <td class="text-center qty-bold">01</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="facility-highlights">
+    <div class="container">
+        
+        <div class="section-header center-aligned">
+            <span class="section-tag">Operational Strength</span>
+            <h2>Facility Infrastructure</h2>
+            <div class="separator"></div>
+            <p class="section-subtitle">
+                Beyond machinery, we have invested in a robust supporting ecosystem to ensure zero downtime and consistent production quality.
+            </p>
+        </div>
+
+        <div class="highlights-grid">
+            
+            <!-- Card 1: Power Backup -->
+            <div class="highlight-card">
+                <div class="icon-wrapper">
+                    <!-- Icon: Lightning/Power -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3>100% Power Backup</h3>
+                <p>Equipped with a 62.5 KVA Silent DG Set to ensure 24/7 uninterrupted production, eliminating delivery delays caused by power outages.</p>
+            </div>
+
+            <!-- Card 2: Tool Room -->
+            <div class="highlight-card">
+                <div class="icon-wrapper">
+                    <!-- Icon: Wrench/Tool -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                </div>
+                <h3>In-House Tool Room</h3>
+                <p>Dedicated facility for designing and manufacturing Jigs, Fixtures, and Gauges, significantly reducing lead time for new product development.</p>
+            </div>
+
+            <!-- Card 3: Design Studio -->
+            <div class="highlight-card">
+                <div class="icon-wrapper">
+                    <!-- Icon: Computer/CAD -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3>CAD/CAM Design</h3>
+                <p>Advanced workstations running SolidWorks and AutoCAD for precise 3D modeling, drafting, and tool path generation before machining begins.</p>
+            </div>
+
+            <!-- Card 4: Maintenance -->
+            <div class="highlight-card">
+                <div class="icon-wrapper">
+                    <!-- Icon: Shield/Safety -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3>Preventive Maintenance</h3>
+                <p>Strict adherence to TPM (Total Productive Maintenance) schedules ensures machine accuracy is maintained year-round and breakdowns are minimized.</p>
+            </div>
+
+        </div>
+
+        <!-- Mini CTA -->
+        <div class="infra-cta">
+            <p>Want to see our facility in person?</p>
+            <a href="contact.html" class="btn-link">Schedule a Factory Visit &rarr;</a>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+<footer class="site-footer">
+    
+    <!-- Top Border Line -->
+    <div class="footer-border"></div>
+
+    <div class="container">
+        <div class="footer-grid">
+
+            <!-- COLUMN 1: Brand & About -->
+            <div class="footer-col brand-col">
+                <a href="#" class="footer-logo">GD <span>Engineers</span></a>
+                <p class="footer-desc">
+                    Precision manufacturing and engineering solutions since 1994. ISO 9001:2015 certified exporters delivering quality to the global automotive industry.
+                </p>
+                
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                </div>
+            </div>
+
+            <!-- COLUMN 2: Quick Links -->
+            <div class="footer-col links-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-nav">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Company</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#products">Product Portfolio</a></li>
+                    <li><a href="#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: Contact Details -->
+            <div class="footer-col contact-col">
+                <h4 class="footer-heading">Head Office</h4>
+                
+                <div class="contact-row">
+                    <div class="icon-small">&#128205;</div> <!-- Pin Icon -->
+                    <p>
+                        Plot No. 123, Industrial Area,<br>
+                        MIDC, Pune - 411026,<br>
+                        Maharashtra, India.
+                    </p>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-small">&#9993;</div> <!-- Email Icon -->
+                    <p><a href="mailto:info@gdengineers.in">info@gdengineers.in</a><br><a href="mailto:sales@gdengineers.in">sales@gdengineers.in</a></p>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-small">&#128222;</div> <!-- Phone Icon -->
+                    <p class="mono-font">+91 98765 43210<br>+91 20 1234 5678</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 4: Location Map -->
+            <div class="footer-col map-col">
+                <h4 class="footer-heading">Locate Factory</h4>
+                <div class="map-wrapper">
+                    <!-- Google Map Iframe (Placeholder set to Pune) -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.0471115669!2d73.79292687353086!3d18.524598599502376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="200" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 GD Engineers. All Rights Reserved.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <span class="dot">·</span>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+
+
+
+
+</body>
+
+<script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous"></script>
+<script nomodule src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('mobile-toggle');
+    const drawer = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('menu-overlay');
+    const closeBtn = document.getElementById('close-menu');
+
+    // Function to toggle menu
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('active');
+        // Prevent scrolling when menu is open
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : 'auto';
+    }
+
+    // Event Listeners
+    hamburger.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+});
+
+// Helper function to close menu when a link is clicked
+function closeMenu() {
+    document.getElementById('mobile-toggle').classList.remove('active');
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('menu-overlay').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+</script>
+</html>
