@@ -1417,6 +1417,195 @@
             background: var(--accent);
             transform: translateY(-5px);
         }
+
+
+/* section 6 */
+
+/* --- FAQ SECTION --- */
+.section-header{
+    padding-bottom: 40px;
+}
+.faq-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    border-top: 1px solid #e2e8f0;
+}
+
+.faq-wrapper {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Text takes more space than card */
+    gap: 60px;
+    align-items: start;
+}
+
+/* --- ACCORDION STYLES --- */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.acc-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Active State (When Open) */
+.acc-item.active {
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.acc-header {
+    background-color: #f8fafc;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.acc-item.active .acc-header {
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+.acc-header h4 {
+    font-size: 16px;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 600;
+}
+
+.icon-plus {
+    font-size: 24px;
+    color: var(--secondary);
+    font-weight: 300;
+    line-height: 0.5;
+    transition: transform 0.3s;
+}
+
+/* Rotate icon when active */
+.acc-item.active .icon-plus {
+    transform: rotate(45deg);
+    color: var(--accent);
+}
+
+.acc-body {
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: var(--white);
+}
+
+.acc-body p {
+    padding: 0 20px 20px 20px;
+    color: var(--secondary);
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- HELP CARD (RIGHT) --- */
+.help-card {
+    background-color: var(--primary); /* Navy */
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    box-shadow: 0 20px 40px rgba(11, 37, 69, 0.2);
+}
+
+/* Decorative Pattern */
+.card-bg-pattern {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+}
+
+.card-content { position: relative; z-index: 2; }
+
+.help-card h3 {
+    color: var(--white);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.help-card p {
+    color: #cbd5e1;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.contact-preview {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.cp-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.cp-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+}
+
+.cp-row a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.cp-row a:hover { color: var(--accent); }
+
+/* Buttons */
+.full-width {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 14px;
+}
+
+.btn-outline {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.05);
+    border-color: var(--white);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .faq-wrapper {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 50px;
+    }
+}
+/* section 6 ends  */
+
+
+        
     </style>
 </head>
 <body>
@@ -1667,6 +1856,98 @@
     </div>
 
 
+    
+<section class="faq-section">
+    <div class="container">
+        
+        <div class="faq-wrapper">
+            
+            <!-- LEFT: FAQ Accordion -->
+            <div class="faq-content">
+                <div class="section-header align-left">
+                    <span class="section-tag">Information</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="separator-left"></div>
+                </div>
+
+                <div class="accordion">
+                    
+                    <!-- Question 1 -->
+                    <div class="acc-item">
+                        <div class="acc-header" onclick="toggleAcc(this)">
+                            <h4>Do you handle low-volume prototypes?</h4>
+                            <span class="icon-plus">+</span>
+                        </div>
+                        <div class="acc-body">
+                            <p>Yes. While we specialize in high-volume production, our Manual Machining department is dedicated to prototyping and low-volume batch production to help you validate designs before mass manufacturing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="acc-item">
+                        <div class="acc-header" onclick="toggleAcc(this)">
+                            <h4>What file formats do you accept for quoting?</h4>
+                            <span class="icon-plus">+</span>
+                        </div>
+                        <div class="acc-body">
+                            <p>We work with most industry-standard CAD formats. The preferred formats are <strong>.STEP, .IGES, .X_T (Parasolid)</strong>, and <strong>.DWG</strong> for 2D drawings. PDF drawings with tolerance specifications are also recommended.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="acc-item">
+                        <div class="acc-header" onclick="toggleAcc(this)">
+                            <h4>What is your standard lead time?</h4>
+                            <span class="icon-plus">+</span>
+                        </div>
+                        <div class="acc-body">
+                            <p>Standard lead time is typically <strong>2-4 weeks</strong> depending on material availability and complexity. For urgent requirements, we offer an expedited "Fast-Track" service subject to machine availability.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="acc-item">
+                        <div class="acc-header" onclick="toggleAcc(this)">
+                            <h4>Do you provide material certifications?</h4>
+                            <span class="icon-plus">+</span>
+                        </div>
+                        <div class="acc-body">
+                            <p>Absolutely. All our shipments are accompanied by a <strong>Material Test Certificate (MTC)</strong> and a Dimensional Inspection Report. We adhere to strict ISO 9001:2015 traceability standards.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT: Help / CTA Card -->
+            <div class="help-card">
+                <div class="card-bg-pattern"></div>
+                <div class="card-content">
+                    <h3>Still have questions?</h3>
+                    <p>Our engineering team is ready to discuss your specific requirements.</p>
+                    
+                    <div class="contact-preview">
+                        <div class="cp-row">
+                            <span class="cp-icon">&#9993;</span>
+                            <a href="mailto:info@gdengineers.in">info@gdengineers.in</a>
+                        </div>
+                        <div class="cp-row">
+                            <span class="cp-icon">&#128222;</span>
+                            <a href="tel:+919876543210">+91 98765 43210</a>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-gold full-width">Get a Custom Quote</a>
+                    <a href="#" class="btn btn-outline full-width">Contact us</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
 
 
 
@@ -1872,5 +2153,25 @@ function closeMenu() {
 }
 </script>
 
+
+<script>
+    function toggleAcc(element) {
+        // Get the parent .acc-item
+        const item = element.parentElement;
+        
+        // Get the body content inside
+        const body = item.querySelector('.acc-body');
+
+        // Toggle Active Class
+        item.classList.toggle('active');
+
+        // Animate Height
+        if (item.classList.contains('active')) {
+            body.style.maxHeight = body.scrollHeight + "px";
+        } else {
+            body.style.maxHeight = null;
+        }
+    }
+</script>
 
 </html>
